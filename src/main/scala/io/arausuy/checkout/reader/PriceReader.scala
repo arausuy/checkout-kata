@@ -4,7 +4,7 @@ import io.arausuy.checkout.model.SpecialPricing
 
 import scala.util.Try
 
-object SpecialPriceReader {
+object PriceReader {
   val pricingDelimiter = '~'
   val fieldDelimiter = ','
 
