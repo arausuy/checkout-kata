@@ -29,7 +29,7 @@ object Application {
 
     val itemIn = StdIn.readLine()
 
-    itemIn match {
+    itemIn.toUpperCase match {
       case "CHECKOUT" =>
         println(s"Final total: ${checkout.calculateTotal(items)}")
         Unit
