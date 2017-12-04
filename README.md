@@ -20,3 +20,24 @@ Our checkout accepts items in any order, so that if we scan a B, an A, and anoth
 recognise the two B’s and price them at 45 (for a total price so far of 95). Because the pricing
 changes frequently, we need to be able to pass in a set of pricing rules each time we start
 handling a checkout transaction.
+
+
+## To Run
+
+`sbt run`
+
+You will then be prompted to enter your pricing. There is a specific format for this:
+
+`a,50,3 for 130~b,30,2 for 45~c,20~d,15`
+
+You will then be prompted to scan your items.
+A <enter>
+B <enter>
+B <enter>
+CHECKOUT <enter>
+
+You will receive a running total of your basket and a final one upon finishing checking out.
+
+## To Test
+
+`sbt test` will run the test suite. The tests use Scalatests WordSpec.
