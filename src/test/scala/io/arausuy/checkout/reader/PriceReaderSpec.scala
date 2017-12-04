@@ -10,7 +10,7 @@ class PriceReaderSpec extends WordSpecLike with Matchers {
       val offerList = "d,34,2 for 50~c,50,3 for 100"
       val parsedMap = PriceReader.createSpecialPricingMap(offerList)
       parsedMap.size shouldBe 2
-      parsedMap("c") shouldBe SpecialPricing(3, BigDecimal(100), BigDecimal(50))
+      parsedMap("C") shouldBe SpecialPricing(3, BigDecimal(100), BigDecimal(50))
     }
 
     "not have any special offers for a malformed offerlist" in {
@@ -23,7 +23,15 @@ class PriceReaderSpec extends WordSpecLike with Matchers {
       val offerList = "d,34,2 for 50~c,50,3 f0r 100"
       val parsedMap = PriceReader.createSpecialPricingMap(offerList)
       parsedMap.size shouldBe 1
-      parsedMap("d") shouldBe SpecialPricing(2, BigDecimal(50), BigDecimal(34))
+      parsedMap("D") shouldBe SpecialPricing(2, BigDecimal(50), BigDecimal(34))
+    }
+
+    "read prices in" in {
+      val offerList = "d,34,2 for 50~c,50,3 for 100"
+      val parsedMap = PriceReader.createPriceMap(offerList)
+      parsedMap.size shouldBe 2
+      parsedMap("C") shouldBe BigDecimal(50)
+
     }
 
 

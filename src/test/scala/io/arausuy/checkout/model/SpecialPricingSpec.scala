@@ -8,7 +8,7 @@ class SpecialPricingSpec extends WordSpecLike with Matchers {
       "calculate the subtotal for an item with a qualifiying special offer" in {
         val sP = SpecialPricing(2, 20, 15)
 
-        val item = A(15)
+        val item = A
         val tmpList = List(item,item,item)
         sP.calculateSubtotal(tmpList) shouldBe 35
       }
@@ -16,7 +16,7 @@ class SpecialPricingSpec extends WordSpecLike with Matchers {
     "calculate the subtotal for an item that does not qualify for a special offer" in {
         val sP = SpecialPricing(9, 20, 15)
 
-        val item = A(15)
+        val item = A
         val tmpList = List(item,item,item)
         sP.calculateSubtotal(tmpList) shouldBe 45
       }

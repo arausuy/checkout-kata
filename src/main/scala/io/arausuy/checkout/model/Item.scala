@@ -1,29 +1,33 @@
 package io.arausuy.checkout.model
 
 sealed trait Item {
-  val itemType: String = this.getClass().getSimpleName
-  val price: BigDecimal
+  val itemType: String = this.getClass().getSimpleName.replace("$", "")
 }
 
-case class A(price: BigDecimal) extends Item
-case class B(price: BigDecimal) extends Item
-case class C(price: BigDecimal) extends Item
-case class D(price: BigDecimal) extends Item
+case object A extends Item
+case object B extends Item
+case object C extends Item
+case object D extends Item
 
 
 
 object Item {
 
-  def apply(itemName: String, price: BigDecimal): Either[Throwable, Item] = {
+  def apply(itemName: String, priceMap: Map[String, BigDecimal]): Either[Throwable, Item] = {
+    if(priceMap.get(itemName.toUpperCase).isDefined) {
     itemName.toUpperCase match {
-      case "A" => Right(A(price))
-      case "B" => Right(B(price))
-      case "C" => Right(C(price))
-      case "D" => Right(D(price))
-      case _ => Left(UnknownItemException("Unable to create object"))
+      case "A" => Right(A)
+      case "B" => Right(B)
+      case "C" => Right(C)
+      case "D" => Right(D)
+      case _ => Left(UnknownItemException("Unable to find item but pricing exists!"))
+    }
+  } else {
+    Left(PricingMissingException(s"Missing Pricing for ${itemName.toUpperCase}"))
     }
   }
 
   case class UnknownItemException(msg: String) extends Exception(msg)
+  case class PricingMissingException(msg: String) extends Exception(msg)
 
 }
