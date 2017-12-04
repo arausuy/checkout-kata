@@ -13,7 +13,7 @@ case object D extends Item
 
 object Item {
 
-  def apply(itemName: String, priceMap: Map[String, BigDecimal]): Either[Throwable, Item] = {
+  def apply(priceMap: Map[String, BigDecimal])(itemName:String): Either[Throwable, Item] = {
     if(priceMap.get(itemName.toUpperCase).isDefined) {
     itemName.toUpperCase match {
       case "A" => Right(A)

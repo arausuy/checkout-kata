@@ -3,9 +3,9 @@ package io.arausuy.checkout
 import io.arausuy.checkout.model.{Item, SpecialPricing}
 
 
-class Checkout(pricingMap: Map[String, BigDecimal], pricingRules: Map[String, SpecialPricing], basket: List[Item]) {
+class Checkout(pricingMap: Map[String, BigDecimal], pricingRules: Map[String, SpecialPricing]) {
 
-  def calculateTotal() = {
+  def calculateTotal(basket: List[Item]) = {
     basket.groupBy(i => i.itemType).map{i =>
       val key = i._1
       val items = i._2

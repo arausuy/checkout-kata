@@ -33,6 +33,13 @@ class PriceReaderSpec extends WordSpecLike with Matchers {
       parsedMap("C") shouldBe BigDecimal(50)
 
     }
+    "read prices in for items without special offers" in {
+      val offerList = "d,34~c,50,3 for 100"
+      val parsedMap = PriceReader.createPriceMap(offerList)
+      parsedMap.size shouldBe 2
+      parsedMap("D") shouldBe BigDecimal(34)
+
+    }
 
 
 

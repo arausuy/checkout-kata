@@ -5,14 +5,14 @@ import io.arausuy.checkout.model.SpecialPricing
 import scala.util.Try
 
 object PriceReader {
-  val pricingDelimiter = '~'
-  val fieldDelimiter = ','
+  private val pricingDelimiter = '~'
+  private val fieldDelimiter = ','
 
 
   //TODO: Refactor to generic method
   def createPriceMap(pricing: String) = {
     pricing.split(pricingDelimiter).flatMap { line =>
-      if (line.count(_.equals(fieldDelimiter)) == 2) {
+      if (line.count(_.equals(fieldDelimiter)) >= 1) {
         val offer = line.split(fieldDelimiter)
         Try(offer(0).toUpperCase() -> BigDecimal(offer(1))).toOption
       } else {
