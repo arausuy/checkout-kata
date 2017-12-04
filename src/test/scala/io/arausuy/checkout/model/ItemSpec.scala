@@ -18,24 +18,28 @@ class ItemSpec extends WordSpecLike with Matchers {
       val anA = A(BigDecimal(1.0))
       attempt.isRight shouldBe true
       attempt.right.get shouldBe anA
+      attempt.right.get.itemType shouldBe "A"
     }
     "create a B" in {
       val attempt = Item("B", BigDecimal(1.0))
       val b = B(BigDecimal(1.0))
       attempt.isRight shouldBe true
       attempt.right.get shouldBe b
+      attempt.right.get.itemType shouldBe "B"
     }
     "create a C" in {
       val attempt = Item("C", BigDecimal(1.0))
       val c = C(BigDecimal(1.0))
       attempt.isRight shouldBe true
       attempt.right.get shouldBe c
+      attempt.right.get.itemType shouldBe "C"
     }
     "create a D" in {
       val attempt = Item("D", BigDecimal(1.0))
       val d = D(BigDecimal(1.0))
       attempt.isRight shouldBe true
       attempt.right.get shouldBe d
+      attempt.right.get.itemType shouldBe "D"
     }
 
 

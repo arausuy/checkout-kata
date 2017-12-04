@@ -1,6 +1,9 @@
 package io.arausuy.checkout.model
 
-sealed trait Item
+sealed trait Item {
+  val itemType: String = this.getClass().getSimpleName
+  val price: BigDecimal
+}
 
 case class A(price: BigDecimal) extends Item
 case class B(price: BigDecimal) extends Item

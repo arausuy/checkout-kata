@@ -12,7 +12,7 @@ object SpecialPriceReader {
     pricing.split(pricingDelimiter).flatMap { line =>
       if (line.count(_.equals(fieldDelimiter)) == 2) {
         val offer = line.split(fieldDelimiter)
-        createSpecialPrice(offer(0), offer(2))
+        createSpecialPrice(offer(0), offer(2), offer(1))
       } else {
         None
       }
@@ -20,9 +20,10 @@ object SpecialPriceReader {
 
   }
 
-  private def createSpecialPrice(offerFor: String, priceOffer: String) = {
+  private def createSpecialPrice(offerFor: String, priceOffer: String, originalPricing: String) = {
     val splits = priceOffer.toLowerCase.replace(" ", "").split("for")
-    Try(offerFor -> SpecialPricing(splits(0).toInt, BigDecimal(splits(1)))).toOption //Unacceptably lazy approach
+    //Unacceptably lazy approach
+    Try(offerFor -> SpecialPricing(splits(0).toInt, BigDecimal(splits(1)), BigDecimal(originalPricing))).toOption
   }
 
 }
